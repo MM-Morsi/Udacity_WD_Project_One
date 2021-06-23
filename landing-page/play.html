@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#example {
+            width: 400px;
+            height: 200px;
+            padding: 30px;
+            margin: 50px auto;
+            background: purple;
+        }
+
+        body {
+            padding-bottom: 1000px;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example">Example</div>
+    <div id="controls">Control</div>
+
+    <input placeholder="Enter some text" name="name" />
+    <p id="values"></p>
+
+    <input type="number" id="textOne" placeholder="Enter">
+    <button id = "btn1" onclick="fn1()">Click Me</button>
+
+    <script>
+        const input = document.querySelector('input');
+        const log = document.getElementById('values');
+
+        input.addEventListener('input', updateValue);
+
+        function updateValue(e) {
+            log.textContent = e.target.value;
+        }
+    </script>
+    <script>
+        function update() {
+            const container = document.getElementById("controls");
+            const elem = document.querySelector('div');
+            const rect = elem.getBoundingClientRect();
+
+            container.innerHTML = '';
+            for (let key in rect) {
+                if (typeof rect[key] !== 'function') {
+                    let para = document.createElement('p');
+                    para.textContent = `${key} : ${rect[key]}`;
+                    container.appendChild(para);
+                }
+            }
+        }
+        document.addEventListener('scroll', update);
+        update();
+    </script>
+
+    
+
+    <script>
+        function fn1(){
+            var str = document.getElementById("textOne").value;
+            console.log(str);
+        };
+    </script>
+
+</body>
+
+</html>
