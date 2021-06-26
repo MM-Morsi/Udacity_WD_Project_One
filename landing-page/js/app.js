@@ -135,7 +135,7 @@ function scrolling(){
   // get the element triggering the event
   el = event.target;
   // get the element ID
-  sectionID = el.innerHTML.match(/(\d)/)[0];
+  sectionID = el.innerHTML.match(/(\d+)/)[0];
   // console.log(sectionID);
   section = document.getElementById("section"+sectionID);
   section.scrollIntoView({behavior: "smooth"});
