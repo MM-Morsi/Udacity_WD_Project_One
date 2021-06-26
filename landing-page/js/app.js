@@ -33,13 +33,13 @@ function getSectionNumber() {
 // function to add another section dynamically 
 function addSection() {
   let num = document.getElementById("secNum").value;
-  console.log(num);
+  // console.log(num);
   if(num > 100){
     num = 100;
   }
   let existingNM = document.querySelectorAll("section").length;
   newNum = num - existingNM;
-  console.log(newNum);
+  // console.log(newNum);
   for (let i = 0; i < newNum; i++) {
     const newSection = document.createElement("section");
     const sectionID = getSectionNumber() + 1;
@@ -67,7 +67,7 @@ function addSection() {
     newDiv.appendChild(newp2);
     newp2.appendChild(newp2Text);
   }
-  console.log("test")
+  // console.log("test")
   buildNav(newNum);
   document.getElementById("btn1").remove();
   document.getElementById("secNum").remove();
@@ -101,7 +101,8 @@ function buildNav(newNum) {
     let li_element = document.createElement("li");
     let a_element = document.createElement("a");
     a_element.setAttribute("class", "menu__link");
-    a_element.setAttribute("href", "#section" + (i + 1));
+    // a_element.setAttribute("href", "#section" + (i + 1));
+    a_element.setAttribute("onclick", "scrolling()");
     a_element.innerHTML = "Section " + (i + 1);
     //li_element.innerHTML = "<a class = \"menu_link\" href = #section" + i + "Section" +i;
     //li_element.setAttribute("class", "menu__link")
@@ -130,6 +131,15 @@ function setActive() {
 }
 
 // Scroll to anchor ID using scrollTO event
+function scrolling(){
+  // get the element triggering the event
+  el = event.target;
+  // get the element ID
+  sectionID = el.innerHTML.match(/(\d)/)[0];
+  // console.log(sectionID);
+  section = document.getElementById("section"+sectionID);
+  section.scrollIntoView({behavior: "smooth"});
+}
 
 /**
  * End Main Functions
