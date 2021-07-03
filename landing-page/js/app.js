@@ -39,8 +39,9 @@ function addSection() {
   }
   let existingNM = document.querySelectorAll("section").length;
   newNum = num - existingNM;
-  // console.log(newNum);
+  console.log("newNUM =" + newNum);
   for (let i = 0; i < newNum; i++) {
+    // console.log("I'm in the loop");
     const newSection = document.createElement("section");
     const sectionID = getSectionNumber() + 1;
     newSection.setAttribute("id", "section" + sectionID);
@@ -68,7 +69,7 @@ function addSection() {
     newp2.appendChild(newp2Text);
   }
   // console.log("test")
-  buildNav(newNum);
+  buildNav(newNum, existingNM);
   document.getElementById("btn1").remove();
   document.getElementById("secNum").remove();
   document.getElementById("label1").remove();
@@ -90,13 +91,9 @@ function isViewed(sectionTested) {
 */
 
 // build the nav
-function buildNav(newNum) {
+function initiateNav(){
   const navbarList = document.getElementById("navbar__list");
-  const sectionID = getSectionNumber();
-  if(sectionID < newNum){
-    return;
-  }
-  for (let i = 0; i < sectionID; i++) {
+  for (let i = 0; i < 3; i++) {
     // create list item 
     let li_element = document.createElement("li");
     let a_element = document.createElement("a");
@@ -104,6 +101,25 @@ function buildNav(newNum) {
     // a_element.setAttribute("href", "#section" + (i + 1));
     a_element.setAttribute("onclick", "scrolling()");
     a_element.innerHTML = "Section " + (i + 1);
+    //li_element.innerHTML = "<a class = \"menu_link\" href = #section" + i + "Section" +i;
+    //li_element.setAttribute("class", "menu__link")
+    li_element.appendChild(a_element);
+    navbarList.appendChild(li_element);
+  }
+}
+function buildNav(newNum, existingNM) {
+  if(newNum <= 0){
+    return;
+  }
+  const navbarList = document.getElementById("navbar__list");
+  for (let i = 0; i < newNum; i++) {
+    // create list item 
+    let li_element = document.createElement("li");
+    let a_element = document.createElement("a");
+    a_element.setAttribute("class", "menu__link");
+    // a_element.setAttribute("href", "#section" + (i + 1));
+    a_element.setAttribute("onclick", "scrolling()");
+    a_element.innerHTML = "Section " + (i + 1 + existingNM);
     //li_element.innerHTML = "<a class = \"menu_link\" href = #section" + i + "Section" +i;
     //li_element.setAttribute("class", "menu__link")
     li_element.appendChild(a_element);
@@ -148,7 +164,7 @@ function scrolling(){
 */
 
 // Build menu
-
+initiateNav();
 
 // Scroll to section on link click
 /*
